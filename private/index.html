@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Оформление заявки — АВТО СОЮЗ</title>
-  <meta name="description" content="Калькулятор и оформление заявки. Уточнение условий, сроков и списка документов." />
+  <meta name="description" content="Калькулятор и оформление заявки: выберите услугу и сроки, отправьте заявку менеджеру." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,10 +13,15 @@
       <a class="back" href="../index.html">← На сайт</a>
 
       <div class="hero">
-        <h1 class="hero__title">Оформление заявки</h1>
+        <div class="hero__row">
+          <h1 class="hero__title">Оформление заявки</h1>
+
+          <button class="theme" id="themeToggle" type="button" aria-label="Сменить тему">🌙</button>
+        </div>
+
         <p class="hero__sub">
-          Укажите город, выберите услугу и срок — калькулятор покажет ориентировочную стоимость.
-          Затем оставьте контакт для подтверждения деталей, перечня документов и оплаты.
+          Заполните калькулятор — он покажет ориентировочную стоимость. Затем оставьте контакт для подтверждения деталей,
+          перечня документов и порядка действий.
         </p>
 
         <div class="hero__chips">
@@ -24,12 +29,11 @@
           <span class="chip">Срочно: 4–7 дней</span>
           <span class="chip chip--soft">Стоимость ориентировочная</span>
         </div>
-      </div>
 
-      <div class="ctaRow">
-        <a class="btn btn--primary" id="tgDirectTop" href="https://t.me/USERNAME" target="_blank" rel="noopener">
-          Связаться в Telegram
-        </a>
+        <div class="hero__cta">
+          <a class="btn btn--primary" id="tgDirectTop" href="https://t.me/USERNAME" target="_blank" rel="noopener">Связаться в Telegram</a>
+          <button class="btn btn--ghost" id="copySummary" type="button">Скопировать итог</button>
+        </div>
       </div>
     </div>
   </header>
@@ -40,49 +44,48 @@
       <section class="card">
         <div class="card__head">
           <h2 class="card__title">Калькулятор</h2>
-          <p class="muted">Выберите услугу — цена пересчитается автоматически.</p>
+          <p class="muted">Выберите услугу и параметры — цена пересчитается автоматически.</p>
         </div>
 
         <div class="fields">
           <label class="field">
             <span class="field__label">Город</span>
-            <input id="city" name="city" type="text" placeholder="Например: Москва" required />
+            <input id="city" name="city" type="text" placeholder="Например: Москва" />
           </label>
 
           <label class="field">
             <span class="field__label">Услуга</span>
             <select id="service" name="service" required>
               <option value="" selected disabled>Выберите услугу</option>
-              <option value="dl">Сопровождение по получению водительского удостоверения</option>
-              <option value="med">Медицинская справка (003-В/у)</option>
-              <option value="exam">Подготовка/сопровождение по экзаменам</option>
+              <option value="dl">Водительское удостоверение</option>
+              <option value="med">Медицинская справка</option>
+              <option value="exam">Экзамены</option>
               <option value="train">Обучение / автошкола (консультация)</option>
             </select>
           </label>
 
-          <!-- DL: categories -->
+          <!-- В/У: категории -->
           <div class="fieldGroup" id="dlBox" hidden>
-  <div class="field">
-    <span class="field__label">Категории (можно выбрать несколько)</span>
+            <div class="field">
+              <span class="field__label">Категории (можно выбрать несколько)</span>
 
-    <div class="cats" id="cats">
-      <label class="cat"><input type="checkbox" name="dlCats" value="A"> A</label>
-      <label class="cat"><input type="checkbox" name="dlCats" value="B"> B</label>
-      <label class="cat"><input type="checkbox" name="dlCats" value="C"> C</label>
-      <label class="cat"><input type="checkbox" name="dlCats" value="D"> D</label>
-      <label class="cat"><input type="checkbox" name="dlCats" value="CE"> CE</label>
-      <label class="cat"><input type="checkbox" name="dlCats" value="DE"> DE</label>
-    </div>
+              <div class="cats" id="cats">
+                <label class="cat"><input type="checkbox" name="dlCats" value="A"> A</label>
+                <label class="cat"><input type="checkbox" name="dlCats" value="B"> B</label>
+                <label class="cat"><input type="checkbox" name="dlCats" value="C"> C</label>
+                <label class="cat"><input type="checkbox" name="dlCats" value="D"> D</label>
+                <label class="cat"><input type="checkbox" name="dlCats" value="CE"> CE</label>
+                <label class="cat"><input type="checkbox" name="dlCats" value="DE"> DE</label>
+              </div>
 
-    <p class="muted small">
-      Стоимость считается по количеству выбранных категорий:
-      1 — 55 000 ₽, 2 — 68 000 ₽, 3+ — 76 000 ₽.
-      Срочно +12 000 ₽.
-    </p>
-  </div>
-</div>
+              <p class="muted small">
+                Стоимость по количеству выбранных категорий:
+                1 — 55 000 ₽, 2 — 68 000 ₽, 3+ — 76 000 ₽. Срочно +12 000 ₽.
+              </p>
+            </div>
+          </div>
 
-          <!-- MED options -->
+          <!-- Медсправки -->
           <div class="fieldGroup" id="medBox" hidden>
             <div class="checks">
               <label class="check">
@@ -91,37 +94,39 @@
               </label>
               <label class="check">
                 <input type="radio" name="medType" value="narko" />
-                <span>От нарколога (доп.)</span>
+                <span>Справка от нарколога (доп.)</span>
               </label>
               <label class="check">
                 <input type="radio" name="medType" value="psy" />
-                <span>От психиатра (доп.)</span>
+                <span>Справка от психиатра (доп.)</span>
               </label>
             </div>
             <p class="muted small">
-              Выберите один вариант. Оформление — через лицензированные медучреждения/комиссии (по требованиям региона).
+              Цена одинаковая для выбранного варианта: 7 500 ₽ (обычно) / 9 500 ₽ (срочно).
             </p>
           </div>
 
-          <!-- EXAM options -->
+          <!-- Экзамены -->
           <div class="fieldGroup" id="examBox" hidden>
             <div class="checks">
               <label class="check">
                 <input type="radio" name="examType" value="theory" />
-                <span>Теория</span>
+                <span>Теория — 12 000 ₽</span>
               </label>
               <label class="check">
                 <input type="radio" name="examType" value="practice" />
-                <span>Практика</span>
+                <span>Практика — 33 000 ₽</span>
               </label>
               <label class="check">
                 <input type="radio" name="examType" value="both" checked />
-                <span>Теория + практика</span>
+                <span>Теория + практика — 42 000 ₽</span>
               </label>
             </div>
+            <p class="muted small">
+              Срочно добавляет +5 000 ₽ к выбранной опции.
+            </p>
           </div>
 
-          <!-- Urgent -->
           <label class="field">
             <span class="field__label">Срок</span>
             <select id="speed" name="speed">
@@ -137,7 +142,7 @@
             <div class="result__price" id="priceOut">—</div>
           </div>
           <div class="muted small" id="priceHint">
-            Итог уточняется менеджером после подтверждения города, услуги и вводных.
+            Выберите услугу и параметры — калькулятор покажет ориентировочную стоимость.
           </div>
         </div>
 
@@ -147,17 +152,28 @@
         </div>
       </section>
 
-      <!-- RIGHT: Request + Terms -->
+      <!-- RIGHT: Form + Terms -->
       <aside class="stack">
         <section class="card">
           <div class="card__head">
             <h2 class="card__title">Заявка</h2>
-            <p class="muted">Оставьте контакт — менеджер подтвердит условия, список документов и порядок действий.</p>
+            <p class="muted">Оставьте контакт — мы подтвердим вводные и подскажем дальнейшие шаги.</p>
           </div>
 
-          <!-- Netlify Forms: работает без сервера -->
-          <form name="lead" method="POST" data-netlify="true" action="/thanks.html" id="leadForm" class="form">
+          <!-- Netlify Forms -->
+          <form
+            name="lead"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            action="/"
+            id="leadForm"
+            class="form"
+          >
             <input type="hidden" name="form-name" value="lead" />
+            <input type="hidden" name="bot-field" />
+
+            <!-- Сюда JS положит итог -->
             <input type="hidden" name="calc_summary" id="calcSummary" />
             <input type="hidden" name="calc_price" id="calcPrice" />
 
@@ -173,15 +189,13 @@
 
             <label class="field">
               <span class="field__label">Комментарий (необязательно)</span>
-              <textarea name="comment" rows="4" placeholder="Например: город/категория/вопросы"></textarea>
+              <textarea name="comment" rows="4" placeholder="Можно уточнить детали/вопросы"></textarea>
             </label>
 
-            <button class="btn btn--primary btn--block" type="submit">
-              Отправить заявку
-            </button>
+            <button class="btn btn--primary btn--block" type="submit">Отправить заявку</button>
 
             <p class="muted small">
-              Нажимая «Отправить», вы соглашаетесь на обработку данных для связи по вашей заявке.
+              После отправки вы попадёте на страницу подтверждения.
             </p>
           </form>
         </section>
@@ -189,19 +203,14 @@
         <section class="card" id="terms">
           <div class="card__head">
             <h2 class="card__title">Условия работы</h2>
-            <p class="muted">Заполнишь позже — пока плейсхолдер.</p>
+            <p class="muted">Заполнишь позже — сейчас это заглушка.</p>
           </div>
 
           <ul class="list">
-            <li>Формат: консультация и сопровождение по процессу.</li>
-            <li>Сроки зависят от города, категории и выбранной услуги.</li>
-            <li>Точный перечень документов уточняется менеджером по вашей ситуации.</li>
+            <li>Стоимость и сроки зависят от вводных и выбранной услуги.</li>
+            <li>Перечень документов уточняется после подтверждения города и параметров заявки.</li>
+            <li>Связь: Telegram — основной канал.</li>
           </ul>
-
-          <div class="hint">
-            <div class="hint__title">Хочешь — добавим сюда:</div>
-            <div class="muted small">оплату/этапы/гарантии сервиса/регламент общения/частые вопросы.</div>
-          </div>
         </section>
       </aside>
     </section>
