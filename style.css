@@ -591,3 +591,49 @@ strong{font-weight:750}
   .wrap{ padding: 0 14px; }
   .gallery{ grid-template-columns: 1fr; }
 }
+.ava img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+/* ===== Side action button ===== */
+.side-action{
+  position: fixed;
+  right: 16px;
+  bottom: 22%;
+  z-index: 50;
+
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+
+  color: #fff;
+  text-decoration: none;
+
+  background: linear-gradient(180deg, rgba(124,58,237,.9), rgba(6,182,212,.85));
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+
+  opacity: .75;
+  transition: all .25s ease;
+}
+
+.side-action:hover{
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* мобилки */
+@media (max-width: 640px){
+  .side-action{
+    right: 12px;
+    bottom: 18%;
+    padding: 10px 12px;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+}
