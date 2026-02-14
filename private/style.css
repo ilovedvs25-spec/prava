@@ -28,12 +28,7 @@ h1,h2{margin:0}
 p{margin:0}
 
 .top{
-  position: sticky;
-  top:0;
-  z-index: 10;
-  backdrop-filter: blur(10px);
-  background: linear-gradient(180deg, rgba(7,10,18,.85), rgba(7,10,18,.55));
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  position: relative;
 }
 .top__inner{
   max-width: 1100px;
